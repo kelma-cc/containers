@@ -1,0 +1,29 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:recommended",
+		":dependencyDashboard",
+		":assignee(taki-eddine)"
+	],
+	"prHourlyLimit": 0,
+	"prConcurrentLimit": 0,
+	"prCommitsPerRunLimit": 0,
+	"kubernetes": {
+		"fileMatch": [
+			"services/.+\\.yaml$"
+		]
+	},
+	"customManagers": [
+		{
+			"customType": "regex",
+			"description": "Update k3s's helm chart references",
+			"fileMatch": [
+				"charts/.+\\.yaml$"
+			],
+			"matchStrings": [
+				"repo: (?<registryUrl>\\S+)\\n  chart: (?<depName>\\S+)\\n  version: (?<currentValue>\\S+)"
+			],
+			"datasourceTemplate": "helm"
+		}
+	]
+}

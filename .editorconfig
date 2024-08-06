@@ -1,0 +1,24 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = tab
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# shell-format
+shell_variant      = bash  # -ln, --language-dialect str  bash/posix/mksh/bats, default "auto"
+binary_next_line   = true  # -bn, --binary-next-line      binary ops like && and | may start a line
+switch_case_indent = true  # -ci, --case-indent           switch cases will be indented
+space_redirects    = true  # -sr, --space-redirects       redirect operators will be followed by a space
+keep_padding       = true  # -kp, --keep-padding          keep column alignment paddings
+function_next_line = false # -fn, --func-next-line        function opening braces are placed on a separate line
+
+[*.key]
+insert_final_newline = false
+
+[{*.jsonnet,*.libsonnet,*.yml,*.yaml,*.config}]
+indent_style = space
+indent_size = 2
