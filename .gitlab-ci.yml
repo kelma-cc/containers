@@ -1,3 +1,23 @@
 include:
   - project: "renovate-bot/renovate-runner"
     file: "/templates/renovate.gitlab-ci.yml"
+
+containers:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - echo "${CI_REGISTRY_PASSWORD}" | docker login "${CI_REGISTRY}" --username="${CI_REGISTRY_USER}" --password-stdin
+  script:
+    - CI_COMMIT_MESSAGE="${CI_COMMIT_MESSAGE//[$'\n']}"
+    - NAME="${CI_COMMIT_MESSAGE%-*}"
+    - VERSION="${CI_COMMIT_MESSAGE#*-}"
+    - TAG_VERSION="${CI_REGISTRY_IMAGE}/${NAME}:${VERSION}"
+    - TAG_LATEST="${CI_REGISTRY_IMAGE}/${NAME}:latest"
+    - docker build --pull --tag="${TAG_VERSION}" "containers/${NAME}"
+    - docker push "${TAG_VERSION}"
+    - docker build --pull --tag="${TAG_LATEST}" "containers/${NAME}"
+    - docker push "${TAG_LATEST}"
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
