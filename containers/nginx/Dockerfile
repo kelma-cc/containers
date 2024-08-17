@@ -1,4 +1,4 @@
-FROM docker.io/nginx:1.27.0-alpine-slim AS base
+FROM docker.io/nginx:1.27.1-alpine-slim AS base
 USER root
 
 RUN cat "/etc/group"
