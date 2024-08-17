@@ -11,13 +11,12 @@ containers:
     - echo "${CI_REGISTRY_PASSWORD}" | docker login "${CI_REGISTRY}" --username="${CI_REGISTRY_USER}" --password-stdin
   script:
     - CI_COMMIT_MESSAGE="${CI_COMMIT_MESSAGE//[$'\n']}"
-    - NAME="${CI_COMMIT_MESSAGE%-*}"
-    - VERSION="${CI_COMMIT_MESSAGE#*-}"
-    - TAG_VERSION="${CI_REGISTRY_IMAGE}/${NAME}:${VERSION}"
-    - TAG_LATEST="${CI_REGISTRY_IMAGE}/${NAME}:latest"
-    - docker build --pull --tag="${TAG_VERSION}" "containers/${NAME}"
-    - docker push "${TAG_VERSION}"
-    - docker build --pull --tag="${TAG_LATEST}" "containers/${NAME}"
-    - docker push "${TAG_LATEST}"
+    - NAME="${CI_COMMIT_MESSAGE%:*}"
+    - VERSION="${CI_COMMIT_MESSAGE#*:}"
+    - IMAGE="${CI_REGISTRY_IMAGE}/${NAME}"
+    - TAG_VERSION="${IMAGE}:${VERSION}"
+    - TAG_LATEST="${IMAGE}:latest"
+    - docker build --no-cache --pull --tag="${TAG_LATEST}" --tag="${TAG_VERSION}" --file "docker/${NAME}.dockerfile" "docker"
+    - docker push --all-tags "${IMAGE}"
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
