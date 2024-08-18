@@ -3,7 +3,7 @@ WORKDIR /
 USER root
 
 ADD --chmod=700 scripts /
-ADD --chmod=644 resources/nginx/etc /etc
+ADD --chmod=644 resources/etc /etc
 
 RUN /contain.sh                                           \
 	"/etc/nginx/conf.d/default.conf" "/config/nginx.conf" \
