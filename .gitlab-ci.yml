@@ -16,7 +16,7 @@ containers:
     - IMAGE="${CI_REGISTRY_IMAGE}/${NAME}"
     - TAG_VERSION="${IMAGE}:${VERSION}"
     - TAG_LATEST="${IMAGE}:latest"
-    - docker build --no-cache --pull --tag="${TAG_LATEST}" --tag="${TAG_VERSION}" --file "docker/${NAME}.dockerfile" "docker"
+    - docker build --pull --tag="${TAG_LATEST}" --tag="${TAG_VERSION}" --file "docker/containers/${NAME}/Dockerfile" "docker"
     - docker push --all-tags "${IMAGE}"
   rules:
     - if: $CI_COMMIT_BRANCH == "master"

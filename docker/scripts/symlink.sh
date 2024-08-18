@@ -11,5 +11,6 @@ if [ -e "${source}" ]; then
 		cp -a "${source}"/. "${target}"
 	fi
 	rm -rf "${source}"
-	ln -s "${target}" "${source}"
 fi
+
+ln -s "${target}" "${source}"
