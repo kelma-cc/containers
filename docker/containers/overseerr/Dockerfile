@@ -26,4 +26,4 @@ ENV XDG_STATE_HOME="${HOME}/.state"
 WORKDIR /app
 USER 1000:100
 EXPOSE 5055
-ENTRYPOINT [ "/sbin/tini", "--", "yarn", "start" ]
+ENTRYPOINT [ "/sbin/tini", "-g", "--", "yarn", "start" ]
