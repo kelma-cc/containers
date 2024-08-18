@@ -13,4 +13,5 @@ if [ -e "${source}" ]; then
 	rm -rf "${source}"
 fi
 
+mkdir -p "$(dirname "${source}")"
 ln -s "${target}" "${source}"
