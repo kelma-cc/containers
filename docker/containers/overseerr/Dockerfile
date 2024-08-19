@@ -5,11 +5,7 @@ WORKDIR /
 ADD --chmod=755 scripts /
 ADD --chmod=644 resources/etc /etc
 
-RUN /contain.sh                                       \
-	"/app/config/db"            "/data/db"            \
-	"/app/config/settings.json" "/data/settings.json" \
-	"/app/config/cache"         "/cache"              \
-	"/app/config/logs"          "/log"
+RUN /contain.sh "/app/config" "/data"
 
 FROM scratch
 COPY --from=base "/" "/"
