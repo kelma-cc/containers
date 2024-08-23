@@ -8,7 +8,6 @@
 	"rebaseWhen": "behind-base-branch",
 	"prHourlyLimit": 0,
 	"prConcurrentLimit": 0,
-	"prCommitsPerRunLimit": 0,
 	"customManagers": [
 		{
 			"customType": "regex",
