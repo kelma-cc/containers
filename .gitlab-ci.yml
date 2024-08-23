@@ -23,4 +23,4 @@ containers:
     - docker build --pull --tag="${TAG_LATEST}" --tag="${TAG_VERSION}" --file "docker/containers/${NAME}/Dockerfile" "docker"
     - docker push --all-tags "${IMAGE}"
   rules:
-    - if: $CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE != "schedule" && $CI_COMMIT_MESSAGE =~ /^chore(deps):/
+    - if: $CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE != "schedule" && $CI_COMMIT_MESSAGE =~ /^chore\(deps\):/

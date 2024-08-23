@@ -1,4 +1,4 @@
-FROM docker.io/plexinc/pms-docker:1.40.5.8854-f36c552fd AS base
+FROM docker.io/plexinc/pms-docker:1.40.5.8897-e5987a19d AS base
 USER root
 WORKDIR /
 
