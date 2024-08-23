@@ -14,7 +14,7 @@ RUN apk upgrade --no-cache &&             \
 		"tini=0.19.0-r3"
 
 RUN mkdir -p "/app" &&                                                                                                             \
-	wget -O - "https://github.com/Radarr/Radarr/releases/download/v5.8.3.8933/Radarr.master.5.8.3.8933.linux-musl-core-x64.tar.gz" \
+	wget -O - "https://github.com/Radarr/Radarr/releases/download/v5.9.1.9070/Radarr.master.5.9.1.9070.linux-musl-core-x64.tar.gz" \
 		| tar xzf - -C "/app" --strip-components=1 &&                                                                              \
 	rm -r "/app/Radarr.Update"
 
