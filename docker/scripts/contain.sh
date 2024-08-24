@@ -9,9 +9,10 @@ while [ "${#}" != 0 ]; do
 done
 
 /owner.sh \
+	"/cache" \
 	"/config" \
 	"/data" \
-	"/cache" \
+	"/home" \
 	"/log" \
 	"/run"
 
