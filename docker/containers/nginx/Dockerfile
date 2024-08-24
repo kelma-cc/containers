@@ -1,14 +1,15 @@
 FROM docker.io/nginx:1.27.1-alpine-slim AS base
-WORKDIR /
 USER root
+WORKDIR /
 
-ADD --chmod=700 scripts /
-ADD --chmod=644 resources/etc /etc
+ADD --chmod=755 "scripts" "/"
+ADD --chmod=644 "resources/etc" "/etc"
+ADD --chmod=755 "https://github.com/krallin/tini/releases/download/v0.19.0/tini-static-muslc-amd64" "/sbin/tini"
 
 RUN /contain.sh                                           \
-	"/etc/nginx/conf.d/default.conf" "/config/nginx.conf" \
-	"/usr/share/nginx/html"          "/data"              \
 	"/var/cache/nginx"               "/cache"             \
+	"/etc/nginx/conf.d/default.conf" "/config/nginx.conf" \
+	"/usr/share/nginx/html"          "/media"             \
 	"/var/log/nginx"                 "/log"               \
 	"/var/run"                       "/run"
 
@@ -24,7 +25,8 @@ ENV XDG_CONFIG_HOME="${HOME}/.config"
 ENV XDG_DATA_HOME="${HOME}/.data"
 ENV XDG_STATE_HOME="${HOME}/.state"
 
-WORKDIR /
 USER 1000:100
+WORKDIR /
 EXPOSE 80
-ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+VOLUME [ "/media" ]
+ENTRYPOINT [ "/sbin/tini", "-g", "--", "nginx", "-g", "daemon off;" ]
