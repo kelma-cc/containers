@@ -2,8 +2,9 @@ FROM ghcr.io/sct/overseerr:1.33.2 AS base
 USER root
 WORKDIR /
 
-ADD --chmod=755 scripts /
-ADD --chmod=644 resources/etc /etc
+ADD --chmod=755 "scripts" "/"
+ADD --chmod=644 "resources/etc" "/etc"
+ADD --chmod=755 "https://github.com/krallin/tini/releases/download/v0.19.0/tini-static-muslc-amd64" "/sbin/tini"
 
 RUN /contain.sh "/app/config" "/data"
 
@@ -19,7 +20,8 @@ ENV XDG_CONFIG_HOME="${HOME}/.config"
 ENV XDG_DATA_HOME="${HOME}/.data"
 ENV XDG_STATE_HOME="${HOME}/.state"
 
-WORKDIR /app
 USER 1000:100
+WORKDIR /app
 EXPOSE 5055
+VOLUME [ "/data" ]
 ENTRYPOINT [ "/sbin/tini", "-g", "--", "yarn", "start" ]
