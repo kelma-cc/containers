@@ -24,10 +24,10 @@ WORKDIR /
 
 ADD --chmod=755 "scripts" "/"
 ADD --chmod=644 "resources/etc" "/etc"
+ADD --chmod=755 "https://github.com/krallin/tini/releases/download/v0.19.0/tini-static-muslc-amd64" "/sbin/tini"
 
 RUN apk upgrade --no-cache && \
 	apk add --no-cache        \
-		"tini=~0.19.0"        \
 		"python3=~3.12.3"     \
 		"ffmpeg=~6.1.1"       \
 		"7zip=~23.01"
@@ -50,4 +50,8 @@ ENV XDG_STATE_HOME="${HOME}/.state"
 WORKDIR /
 USER 1000:100
 EXPOSE 6767
-ENTRYPOINT [ "/sbin/tini", "-g", "--", "/app/venv/bin/python3", "-u", "/app/bazarr/main.py", "--no-update", "--config", "/data/config" ]
+VOLUME [     \
+	"/data", \
+	"/media" \
+]
+ENTRYPOINT [ "/sbin/tini", "-g", "--", "/app/venv/bin/python3", "-u", "/app/bazarr/main.py", "--no-update", "--config", "/data" ]
