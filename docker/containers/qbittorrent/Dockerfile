@@ -32,4 +32,4 @@ VOLUME [      \
 	"/log",   \
 	"/media"  \
 ]
-ENTRYPOINT [ "/sbin/tini", "-g", "--", "qbittorrent-nox", "--profile=${XDG_DATA_HOME}", "--webui-port=80" ]
+ENTRYPOINT [ "/sbin/tini", "-g", "--", "qbittorrent-nox", "--profile=/home/.data", "--webui-port=80" ]
