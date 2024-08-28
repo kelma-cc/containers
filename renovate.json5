@@ -32,9 +32,9 @@
 				// # renovate: datasource=github-releases dependency=Sonarr/Sonarr
 				// # renovate: datasource=github-releases dependency=Sonarr/Sonarr versioning=loose
 				// ARG VERSION="1.0.0"
-				" renovate: dependency=(?<depName>\\S+)\n.+[:=]\\s*(?<currentValue>\\S+)",
-				" renovate: datasource=(?<datasource>\\S+) dependency=(?<depName>\\S+)\n.+[:=]\\s*(?<currentValue>\\S+)",
-				" renovate: datasource=(?<datasource>\\S+) dependency=(?<depName>\\S+)\n.+[:=]\\s*(?<currentValue>\\S+) versioning=(?<versioning>\\S+)"
+				" renovate: dependency=(?<depName>\\S+)\n.+[:=]\\s*['\"]?(?<currentValue>\\S+)['\"]?",
+				" renovate: datasource=(?<datasource>\\S+) dependency=(?<depName>\\S+)\n.+[:=]\\s*['\"]?(?<currentValue>\\S+)['\"]?",
+				" renovate: datasource=(?<datasource>\\S+) dependency=(?<depName>\\S+)\n.+[:=]\\s*['\"]?(?<currentValue>\\S+)['\"]? versioning=(?<versioning>\\S+)"
 			],
 			"datasourceTemplate": "{{#if datasource}}{{datasource}}{{else}}docker{{/if}}",
 			"versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}loose{{/if}}"
