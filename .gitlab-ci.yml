@@ -13,10 +13,8 @@ containers:
   before_script:
     - echo "${CI_REGISTRY_PASSWORD}" | docker login "${CI_REGISTRY}" --username="${CI_REGISTRY_USER}" --password-stdin
   script:
-    - CI_COMMIT_MESSAGE="${CI_COMMIT_MESSAGE//[$'\n']}"
-    - CI_COMMIT_MESSAGE="${CI_COMMIT_MESSAGE#chore(deps):\ }"
-    - NAME="${CI_COMMIT_MESSAGE%:*}"
-    - VERSION="${CI_COMMIT_MESSAGE#*:}"
+    - NAME="$(cut -d ' ' -f 2 <<< "${CI_COMMIT_MESSAGE}")"
+    - VERSION="$(cut -d ' ' -f 3 <<< "${CI_COMMIT_MESSAGE}")"
     - IMAGE="${CI_REGISTRY_IMAGE}/${NAME}"
     - TAG_VERSION="${IMAGE}:${VERSION}"
     - TAG_LATEST="${IMAGE}:latest"

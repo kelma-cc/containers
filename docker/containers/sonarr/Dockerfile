@@ -4,7 +4,10 @@ WORKDIR /
 
 ADD --chmod=755 "scripts" "/"
 ADD --chmod=644 "resources/etc" "/etc"
-ADD --chmod=755 "https://github.com/krallin/tini/releases/download/v0.19.0/tini-static-muslc-amd64" "/sbin/tini"
+
+# renovate: dependency=krallin/tini
+ARG TINI_VERSION="v0.19.0"
+ADD --chmod=755 "https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static-muslc-amd64" "/sbin/tini"
 
 RUN apk upgrade --no-cache &&           \
 	apk add --no-cache                  \
@@ -13,11 +16,11 @@ RUN apk upgrade --no-cache &&           \
 		"icu-libs=~74.2"                \
 		"sqlite-libs=~3.45.3"
 
-# renovate: datasource=github-releases dependency=Sonarr/Sonarr
-ARG VERSION="4.0.8.1874"
+# renovate: dependency=Sonarr/Sonarr
+ARG SONARR_VERSION="4.0.8.1874"
 
 RUN mkdir -p "/app" &&                                                                                                      \
-	wget -O - "https://github.com/Sonarr/Sonarr/releases/download/v${VERSION}/Sonarr.main.${VERSION}.linux-musl-x64.tar.gz" \
+	wget -O - "https://github.com/Sonarr/Sonarr/releases/download/v${SONARR_VERSION}/Sonarr.main.${SONARR_VERSION}.linux-musl-x64.tar.gz" \
 		| tar xzf - -C "/app" --strip-components=1 &&                                                                       \
 	rm -r "/app/Sonarr.Update"
 
