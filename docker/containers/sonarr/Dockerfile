@@ -13,7 +13,7 @@ RUN apk upgrade --no-cache &&           \
 		"icu-libs=~74.2"                \
 		"sqlite-libs=~3.45.3"
 
-# renovate: dependency=Sonarr/Sonarr
+# renovate: datasource=github-releases dependency=Sonarr/Sonarr
 ARG VERSION="4.0.8.1874"
 
 RUN mkdir -p "/app" &&                                                                                                      \
