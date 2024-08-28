@@ -1,5 +1,3 @@
-# syntax=edrevo/dockerfile-plus
-
 FROM docker.io/alpine:3.20.2 AS build
 USER root
 WORKDIR /app
@@ -21,7 +19,12 @@ RUN mkdir -p "/app"                                                             
 	pip install --upgrade --no-cache-dir -r "requirements.txt"
 
 FROM docker.io/alpine:3.20.2 AS base
-INCLUDE+ include/base.dockerfile
+USER root
+WORKDIR /
+
+ADD --chmod=755 "scripts" "/"
+ADD --chmod=644 "resources/etc" "/etc"
+ADD --chmod=755 "https://github.com/krallin/tini/releases/download/v0.19.0/tini-static-muslc-amd64" "/sbin/tini"
 
 RUN apk upgrade --no-cache && \
 	apk add --no-cache        \
@@ -32,9 +35,20 @@ RUN apk upgrade --no-cache && \
 RUN /contain.sh
 
 FROM scratch AS container
-INCLUDE+ include/scratch.dockerfile
-
 COPY --from=build "/app" "/app"
+COPY --from=base "/" "/"
+
+ENV LANG="en_US.utf8"
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+ENV HOME="/home"
+ENV XDG_CACHE_HOME="${HOME}/.cache"
+ENV XDG_CONFIG_HOME="${HOME}/.config"
+ENV XDG_DATA_HOME="${HOME}/.data"
+ENV XDG_STATE_HOME="${HOME}/.state"
+
+WORKDIR /
+USER 1000:100
 EXPOSE 6767
 VOLUME [ "/data", "/media" ]
 ENTRYPOINT [ "/sbin/tini", "-g", "--", "/app/venv/bin/python3", "-u", "/app/bazarr/main.py", "--no-update", "--config", "/data" ]
