@@ -13,8 +13,11 @@ RUN apk upgrade --no-cache &&           \
 		"icu-libs=~74.2"                \
 		"sqlite-libs=~3.45.3"
 
+# renovate: dependency=Sonarr/Sonarr
+ARG VERSION="4.0.8.1874"
+
 RUN mkdir -p "/app" &&                                                                                                      \
-	wget -O - "https://github.com/Sonarr/Sonarr/releases/download/v4.0.8.1874/Sonarr.main.4.0.8.1874.linux-musl-x64.tar.gz" \
+	wget -O - "https://github.com/Sonarr/Sonarr/releases/download/v${VERSION}/Sonarr.main.${VERSION}.linux-musl-x64.tar.gz" \
 		| tar xzf - -C "/app" --strip-components=1 &&                                                                       \
 	rm -r "/app/Sonarr.Update"
 
@@ -35,8 +38,5 @@ ENV XDG_STATE_HOME="${HOME}/.state"
 USER 1000:100
 WORKDIR /
 EXPOSE 8989
-VOLUME [     \
-	"/data", \
-	"/media" \
-]
+VOLUME [ "/data", "/media" ]
 ENTRYPOINT [ "/sbin/tini", "-g", "--", "/app/Sonarr", "-nobrowser", "-data=/data" ]
