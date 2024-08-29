@@ -5,7 +5,9 @@
 		":dependencyDashboard",
 		":assignee(taki-eddine)"
 	],
+	"dependencyDashboardTitle": "🤖 Renovate Dashboard",
 	"rebaseWhen": "behind-base-branch",
+	"autoApprove": true,
 	"prHourlyLimit": 0,
 	"prConcurrentLimit": 0,
 	"commitMessageLowerCase": "auto",
@@ -15,6 +17,14 @@
 	"commitMessageExtra": "{{replace '^v|-.*$' '' newVersion}}",
 	"commitMessageSuffix": "",
 	"packageRules": [
+		{
+			"automerge": true,
+			"automergeType": "branch",
+			"matchUpdateTypes": [
+				"minor",
+				"patch"
+			]
+		},
 		{
 			"matchPackageNames": "docker.io/plexinc/pms-docker",
 			"commitMessageTopic": "plex",
