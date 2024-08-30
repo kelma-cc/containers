@@ -4,33 +4,43 @@
 		"config:recommended",
 		":dependencyDashboard",
 		":disableRateLimiting",
-		":automergePr",
-		":automergeMinor",
 		":rebaseStalePrs",
-		":assignee(taki-eddine)"
+		":assignee(taki-eddine-47)"
 	],
 	"dependencyDashboardTitle": "🤖 Renovate Dashboard",
 	"dependencyDashboardLabels": [
 		"management::dependencies"
 	],
-	"commitMessageLowerCase": "auto",
-	"commitMessagePrefix": "chore(deps):",
-	"commitMessageAction": "",
-	"commitMessageTopic": "{{lowercase (lookup (split depName '/') 1)}}",
-	"commitMessageExtra": "{{replace '^v|-.*$' '' newVersion}}",
-	"commitMessageSuffix": "",
 	"packageRules": [
 		{
-			"matchPackageNames": "docker.io/plexinc/pms-docker",
-			"commitMessageTopic": "plex",
+			"automerge": true,
+			"automergeType": "branch",
+			"matchUpdateTypes": [
+				"minor",
+				"patch",
+				"pin"
+			],
+			"commitMessageLowerCase": "auto",
+			"commitMessagePrefix": "chore(deps):",
+			"commitMessageAction": "",
+			"commitMessageTopic": "{{lowercase (lookup (split depName '/') 1)}}",
 			"commitMessageExtra": "{{replace '^v|-.*$' '' newVersion}}",
+			"commitMessageSuffix": ""
+		},
+		{
+			"matchPackageNames": [
+				"ghcr.io/qbittorrent/docker-qbittorrent-nox",
+				"docker.io/plexinc/pms-docker"
+			],
 			"versioning": "regex:^(?<major>\\d+)(\\.(?<minor>\\d+))?(\\.(?<patch>\\d+))?(\\.(?<build>\\d+))?(-(?<revision>.*))?$"
 		},
 		{
+			"matchPackageNames": "docker.io/plexinc/pms-docker",
+			"commitMessageTopic": "plex"
+		},
+		{
 			"matchPackageNames": "ghcr.io/qbittorrent/docker-qbittorrent-nox",
-			"commitMessageTopic": "qbittorrent",
-			"commitMessageExtra": "{{replace '^v|-.*$' '' newVersion}}",
-			"versioning": "regex:^(?<major>\\d+)(\\.(?<minor>\\d+))?(\\.(?<patch>\\d+))?(\\.(?<build>\\d+))?(-(?<revision>.*))?$"
+			"commitMessageTopic": "qbittorrent"
 		}
 	],
 	"customManagers": [
@@ -39,12 +49,12 @@
 			"description": "Update custom dependencies",
 			"fileMatch": "/?Dockerfile$",
 			"matchStrings": [
-				// # renovate: dependency=Sonarr/Sonarr datasource=github-releases versioning=loose
+				// # renovate: dependency=Sonarr/Sonarr datasource=github-releases versioning=semver-coerced
 				// ARG SONARR_VERSION="1.0.0"
 				" renovate: dependency=(?<depName>\\S+)( datasource=(?<datasource>\\S+))?( versioning=(?<versioning>\\S+))?\n.+[:=]\\s*['\"]?(?<currentValue>[\\d.]+)['\"]?"
 			],
 			"datasourceTemplate": "{{#if datasource}}{{datasource}}{{else}}github-releases{{/if}}",
-			"versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}loose{{/if}}"
+			"versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver-coerced{{/if}}"
 		}
 	]
 }
