@@ -9,12 +9,11 @@
 		":rebaseStalePrs",
 		":assignee(taki-eddine)"
 	],
-	"autodiscover": true,
-	"autodiscoverFilter": "kelma.cc/containers",
 	"dependencyDashboardTitle": "🤖 Renovate Dashboard",
 	"dependencyDashboardLabels": [
 		"management::dependencies"
 	],
+	"platformAutomerge": false,
 	"commitMessageLowerCase": "auto",
 	"commitMessagePrefix": "chore(deps):",
 	"commitMessageAction": "",
