@@ -13,7 +13,7 @@
 	"dependencyDashboardLabels": [
 		"management::dependencies"
 	],
-	"platformAutomerge": false,
+	"platformAutomerge": true,
 	"commitMessageLowerCase": "auto",
 	"commitMessagePrefix": "chore(deps):",
 	"commitMessageAction": "",
