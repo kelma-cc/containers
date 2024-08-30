@@ -28,11 +28,15 @@
 			"commitMessageSuffix": ""
 		},
 		{
+			"matchDatasources": "github-releases",
+			"versioning": "regex:^v?(?<major>\\d+)(\\.(?<minor>\\d+))?(\\.(?<patch>\\d+))?(\\.(?<build>\\d+))?(-(?<revision>.*))?$"
+		},
+		{
 			"matchPackageNames": [
 				"ghcr.io/qbittorrent/docker-qbittorrent-nox",
 				"docker.io/plexinc/pms-docker"
 			],
-			"versioning": "regex:^(?<major>\\d+)(\\.(?<minor>\\d+))?(\\.(?<patch>\\d+))?(\\.(?<build>\\d+))?(-(?<revision>.*))?$"
+			"versioning": "regex:^v?(?<major>\\d+)(\\.(?<minor>\\d+))?(\\.(?<patch>\\d+))?(\\.(?<build>\\d+))?(-(?<revision>.*))?$"
 		},
 		{
 			"matchPackageNames": "docker.io/plexinc/pms-docker",
