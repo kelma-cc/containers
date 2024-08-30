@@ -15,17 +15,16 @@
 		{
 			"automerge": true,
 			"automergeType": "pr",
-			"matchUpdateTypes": [
-				"minor",
-				"patch",
-				"pin"
-			],
 			"commitMessageLowerCase": "auto",
 			"commitMessagePrefix": "chore(deps):",
 			"commitMessageAction": "",
 			"commitMessageTopic": "{{lowercase (lookup (split depName '/') 1)}}",
 			"commitMessageExtra": "{{replace '^v|-.*$' '' newVersion}}",
 			"commitMessageSuffix": ""
+		},
+		{
+			"automerge": false,
+			"matchUpdateTypes": "major"
 		},
 		{
 			"matchPackageNames": [
