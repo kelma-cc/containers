@@ -14,17 +14,24 @@
 	"packageRules": [
 		{
 			"automerge": true,
-			"automergeType": "pr",
+			"automergeType": "branch",
+			"matchUpdateTypes": [
+				"minor",
+				"patch",
+				"pin",
+				"pinDigest",
+				"digest",
+				"lockFileMaintenance",
+				"rollback",
+				"bump",
+				"replacement"
+			],
 			"commitMessageLowerCase": "auto",
 			"commitMessagePrefix": "chore(deps):",
 			"commitMessageAction": "",
 			"commitMessageTopic": "{{lowercase (lookup (split depName '/') 1)}}",
 			"commitMessageExtra": "{{replace '^v|-.*$' '' newVersion}}",
 			"commitMessageSuffix": ""
-		},
-		{
-			"automerge": false,
-			"matchUpdateTypes": "major"
 		},
 		{
 			"matchPackageNames": [
