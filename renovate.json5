@@ -5,26 +5,30 @@
 		":dependencyDashboard",
 		":assignee(taki-eddine)"
 	],
+	"onboarding": true,
+	"autodiscover": true,
+	"autodiscoverFilter": "kelma.cc/containers",
 	"dependencyDashboardTitle": "🤖 Renovate Dashboard",
-	"rebaseWhen": "behind-base-branch",
-	"autoApprove": true,
+	"dependencyDashboardLabels": [
+		"management::dependencies"
+	],
 	"prHourlyLimit": 0,
 	"prConcurrentLimit": 0,
+	"autoApprove": true,
+	"rebaseWhen": "behind-base-branch",
 	"commitMessageLowerCase": "auto",
 	"commitMessagePrefix": "chore(deps):",
 	"commitMessageAction": "",
 	"commitMessageTopic": "{{lowercase (lookup (split depName '/') 1)}}",
 	"commitMessageExtra": "{{replace '^v|-.*$' '' newVersion}}",
 	"commitMessageSuffix": "",
+	"automerge": true,
+	"automergeType": "branch",
+	"matchUpdateTypes": [
+		"minor",
+		"patch"
+	],
 	"packageRules": [
-		{
-			"automerge": true,
-			"automergeType": "branch",
-			"matchUpdateTypes": [
-				"minor",
-				"patch"
-			]
-		},
 		{
 			"matchPackageNames": "docker.io/plexinc/pms-docker",
 			"commitMessageTopic": "plex",
