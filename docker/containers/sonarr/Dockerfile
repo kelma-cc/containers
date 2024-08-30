@@ -17,7 +17,7 @@ RUN apk upgrade --no-cache &&           \
 		"sqlite-libs=~3.45.3"
 
 # renovate: dependency=Sonarr/Sonarr
-ARG SONARR_VERSION="4.0.8.1874"
+ARG SONARR_VERSION="4.0.9.2244"
 
 RUN mkdir -p "/app" &&                                                                                                      \
 	wget -O - "https://github.com/Sonarr/Sonarr/releases/download/v${SONARR_VERSION}/Sonarr.main.${SONARR_VERSION}.linux-musl-x64.tar.gz" \
