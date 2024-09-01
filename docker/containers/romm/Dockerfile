@@ -1,4 +1,4 @@
-FROM docker.io/rommapp/romm:3.4.0 AS base
+FROM docker.io/rommapp/romm:3.5.0 AS base
 USER root
 WORKDIR /
 
