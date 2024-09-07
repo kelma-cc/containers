@@ -1,4 +1,4 @@
-FROM docker.io/alpine:3.20.2 AS base
+FROM docker.io/alpine:3.20.3 AS base
 USER root
 WORKDIR /
 
