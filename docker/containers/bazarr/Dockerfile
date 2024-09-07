@@ -1,4 +1,4 @@
-FROM docker.io/alpine:3.20.2 AS build
+FROM docker.io/alpine:3.20.3 AS build
 USER root
 WORKDIR /app
 
@@ -18,7 +18,7 @@ RUN mkdir -p "/app"                                                             
 	source "venv/bin/activate"                                                              && \
 	pip install --upgrade --no-cache-dir -r "requirements.txt"
 
-FROM docker.io/alpine:3.20.2 AS base
+FROM docker.io/alpine:3.20.3 AS base
 USER root
 WORKDIR /
 
