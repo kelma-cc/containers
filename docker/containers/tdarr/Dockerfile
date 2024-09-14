@@ -1,4 +1,4 @@
-FROM ghcr.io/haveagitgat/tdarr:2.24.05 AS base
+FROM ghcr.io/haveagitgat/tdarr:2.25.01 AS base
 USER root
 WORKDIR /
 
