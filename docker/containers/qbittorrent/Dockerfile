@@ -1,4 +1,4 @@
-FROM ghcr.io/qbittorrent/docker-qbittorrent-nox:4.6.6-1 AS base
+FROM ghcr.io/qbittorrent/docker-qbittorrent-nox:4.6.7-1 AS base
 USER root
 WORKDIR /
 
